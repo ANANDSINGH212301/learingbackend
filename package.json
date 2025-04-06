@@ -2,10 +2,14 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
-  "author": "",
+  "author": "Anand singh",
   "license": "ISC",
-  "description": ""
+  "description": "This is a backend project of a streaming website. this will help to learn me about the backend same as industry level and how the backend files are run and manage.",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
 }
