@@ -11,5 +11,10 @@
   "description": "This is a backend project of a streaming website. this will help to learn me about the backend same as industry level and how the backend files are run and manage.",
   "devDependencies": {
     "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "mongoose": "^8.13.2"
   }
 }
