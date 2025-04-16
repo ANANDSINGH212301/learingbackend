@@ -21,6 +21,12 @@ app.use(express.urlencoded({        // This configuration is to read data throug
 }))
 
 app.use(express.static("public"))   // this is use to configure and use public file in  backend and browser
-
 app.use(cookieParser())            // this is use to perform CRUD operation on cookies in browser
+
+//routes import 
+import userRouter from "./routes/user.routes.js"
+
+//routes declaration
+app.use("/api/v1/users",userRouter)
+
 export {app};
