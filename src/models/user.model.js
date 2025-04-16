@@ -49,8 +49,8 @@ const userSchema = new Schema({
 userSchema.pre("save", async function (next) {
     if (!this.isModefied("password")) {
         return next()
-    }
-    this.password = bcrypt.hash(this.password, 10)
+    };
+    this.password = await bcrypt.hash(this.password, 10)
     next()
 })
 
@@ -82,4 +82,4 @@ userSchema.methods.generateRefreshToken = async function () {
     )
 }
 
-export const Users = Mongoose.model("Users", userSchema)
+export const User = Mongoose.model("User", userSchema)
