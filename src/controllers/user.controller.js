@@ -15,7 +15,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     // Check if the user already exist  -- username or email
-    const existedUser =  User.findOne({
+    const existedUser = await User.findOne({
         $or: [{username},{email}]
     })
     if(existedUser){
@@ -26,7 +26,10 @@ const registerUser = asyncHandler(async (req, res) => {
     const localPathAvatar = req.files?.avatar[0]?.path
 
     // Check for images
-    const localPathCoverimage = req.files?.coverimage[0]?.path
+    let  localPathCoverimage;
+    if (req.files && Array.isArray(req.files.coverimage) && req.files.coverimage[0].length > 0) {
+        localPathCoverimage = req.files?.coverImage[0]?.path
+    }
 
     if(!localPathAvatar){
        throw new ApiError(400 , "Avatar Image is required")
@@ -41,12 +44,12 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // Create user object  - create user in DB
     const newUser = await User.create({
-        fullname,
+        fullName:fullname,
         avatar: avatarC.url,
         coverImage: coverimageC?.url || "",
         email,
         password,
-        username: username.toLowerCase()
+        userName: username
     })
     // Remove password and refresh token field
     const createdUser = await User.findById(newUser._id).select(
@@ -59,7 +62,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
     // Return Response or Error
     return res.status(201).json(
-        new ApiResponse(200,createdUser,"User created and registered")
+        new ApiResponse(200,createdUser,"User Registered")
     )
 })
 
